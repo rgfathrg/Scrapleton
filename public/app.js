@@ -1,12 +1,14 @@
-$.getJSON("/articles", function(data) {
-    for (var i = 0; i < data.length; i++) {
-        $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "</p>");
-    }
-});
+// $.getJSON("/articles", function(data) {
+//     for (var i = 0; i < data.length; i++) {
+//         $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "</p>");
+//     }
+// });
 
 $(document).on("click", "p", function() {
     $("#notes").empty();
+    
     var thisId = $(this).attr("data-id");
+    console.log("this is the id: " + thisId);
 
     $.ajax({
         method: "GET",
@@ -23,4 +25,23 @@ $(document).on("click", "p", function() {
             $("#bodyinput").val(data.note.body);
           }
       });
-})
+});
+
+$(document).on("click", "#savenote", function() {
+    var thisId = $(this).attr("data-id");
+
+    $.ajax({
+        method: "POST",
+        url: "/articles/" + thisId,
+        data: {
+          title: $("#titleinput").val(),
+          body: $("#bodyinput").val()
+        }
+      })
+        .then(function(data) {
+          console.log(data);
+          $("#notes").empty();
+        });
+      $("#titleinput").val("");
+      $("#bodyinput").val("");
+    });

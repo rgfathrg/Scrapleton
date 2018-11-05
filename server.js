@@ -15,6 +15,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("public"));
 
+var exphbs = require("express-handlebars");
+
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
+
 mongoose.connect("mongodb://localhost/scrapedData", { useNewUrlParser: true });
 
 app.get("/scrape", function (req, res) {
@@ -44,13 +49,32 @@ app.get("/scrape", function (req, res) {
 app.get("/articles", function (req, res) {
     db.Article.find({})
         .then(function (dbArticle) {
-            console.log(dbArticle);
-            res.json(dbArticle);
+            var articles = [];
+            dbArticle.forEach(function (element) {
+                
+                var obj = {
+                    id: element._id,
+                    title: element.title,
+                    link: element.link
+                }
+                articles.push(obj);
+            });
+            res.render("index", { 
+                article: articles
+            });
+            // var hbsObject = {
+            //     title: articles.title,
+            //     link: articles.link
+            // }
+            // console.log(hbsObject);
+            
+
         })
         .catch(function (err) {
             console.log(err);
             res.json(err);
         });
+        
 });
 
 app.get("/articles/:id", function (req, res) {
