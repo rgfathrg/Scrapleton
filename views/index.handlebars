@@ -1,14 +1,26 @@
-<h1>Note Scraper</h1>
+<div class="container-fluid">
+    <div class="row">
+        <h1>Scrapleton</h1>
+    </div>
+    <div class="row">
+        <div class="col-sm-7">
+            <ul class="list-group articles">
+                {{#each article}}
+                <li class="list-group-item articles">
+                    <p data-id={{this.id}}>Title: {{ this.title }}<br>
+                        Link: {{this.link}}
+                    </p>
+                </li>
 
-<ul>
-{{#each article}}
-    <li>
-        <p data-id={{this.id}}>{{ this.title }}<br>
-           {{this.link}}
-        </p>
-    </li>
-    
-    {{/each}}
-</ul>
-
-<div id="notes"></div>
+                {{/each}}
+            </ul>
+        </div>
+        <div class="col-sm-5">
+            <div class="card" style="width: 34rem;">
+                <div class="card-body" style="align-content: center">
+                    <div id="notes">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

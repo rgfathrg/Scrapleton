@@ -6,7 +6,6 @@
 
 $(document).on("click", "p", function() {
     $("#notes").empty();
-    
     var thisId = $(this).attr("data-id");
     console.log("this is the id: " + thisId);
 
@@ -17,8 +16,8 @@ $(document).on("click", "p", function() {
       .then(function(data) {
           console.log(data);
           $("#notes").append("<h2>" + data.title + "</h2>");
-          $("#notes").append("<input id='titleinput' name='title' >");
-          $("#notes").append("<textarea id='bodyinput' name='body'></textarea>");
+          $("#notes").append("<input id='titleinput' name='title' placeholder='title'>");
+          $("#notes").append("<textarea id='bodyinput' name='body' placeholder='note'></textarea>");
           $("#notes").append("<button data-id='" + data._id + "' id='savenote'>Save Note</button>");
           if (data.note) {
             $("#titleinput").val(data.note.title);

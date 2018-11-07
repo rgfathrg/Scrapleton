@@ -1,0 +1,23 @@
+
+#articles {
+  display: inline-block;
+  overflow: auto;
+  width: 60%;
+  height: 700px;
+}
+/* textarea, input {
+  /* display: block; */
+  /* width: 100%;
+  background-color: #FCF5C7;
+} */ 
+/* input {
+  position: relative;
+  width: 200px !important;
+  margin: 5px;
+  height: 36px;
+  font-size: 24px;
+}
+textarea {
+  height: 200px;
+  font-size: 18px;
+} */
